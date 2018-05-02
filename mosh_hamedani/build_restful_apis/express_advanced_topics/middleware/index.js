@@ -1,3 +1,5 @@
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const logger = require('./logger');
 const express = require('express');
@@ -14,6 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // 擺放靜態資源 [default: /] ex: http:localhost:3000/readme.txt
 app.use(express.static('public'));
+app.use(helmet());
+app.use(morgan('tiny'));
 
 // 客製化 middleware
 app.use(logger);
