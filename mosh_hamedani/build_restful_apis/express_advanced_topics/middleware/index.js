@@ -1,3 +1,4 @@
+const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const Joi = require('joi');
@@ -20,6 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 // 擺放靜態資源 [default: /] ex: http:localhost:3000/readme.txt
 app.use(express.static('public'));
 app.use(helmet());
+
+// Configuration
+console.log(`Application Name: ${config.get('name')}`);
+console.log(`Mail Server: ${config.get('mail.host')}`);
+console.log(`Mail Password: ${config.get('mail.password')}`);
+
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
   console.log('Morgan enabled...');
