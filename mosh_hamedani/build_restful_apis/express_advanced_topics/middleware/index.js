@@ -5,6 +5,9 @@ const logger = require('./logger');
 const express = require('express');
 const app = express();
 
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`app: ${app.get('env')}`);
+
 // 利用 middleware，解放 body 為 json
 // support ajax!!
 // Content-Type: application/json
@@ -17,7 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 // 擺放靜態資源 [default: /] ex: http:localhost:3000/readme.txt
 app.use(express.static('public'));
 app.use(helmet());
-app.use(morgan('tiny'));
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...');
+}
 
 // 客製化 middleware
 app.use(logger);
