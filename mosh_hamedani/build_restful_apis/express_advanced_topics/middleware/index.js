@@ -1,3 +1,6 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
+
 const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -29,8 +32,11 @@ console.log(`Mail Password: ${config.get('mail.password')}`);
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
-  console.log('Morgan enabled...');
+  startupDebugger('Morgan enabled...');
 }
+
+// Db work
+dbDebugger('Connected to the database...');
 
 // 客製化 middleware
 app.use(logger);
