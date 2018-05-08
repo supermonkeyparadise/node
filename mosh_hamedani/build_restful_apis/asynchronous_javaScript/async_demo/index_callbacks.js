@@ -12,11 +12,6 @@ const getRepositories = (username, callback) => {
   }, 2000);
 };
 
-// 三種解法
-// Callbacks
-// Promises
-// Async/await
-
 console.log('Before');
 
 getUser(1, user => {
