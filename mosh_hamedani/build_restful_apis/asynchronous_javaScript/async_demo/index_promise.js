@@ -1,12 +1,39 @@
-const p = new Promise((resolve, reject) => {
-  // kick off some async work
-  // ...
-  setTimeout(() => {
-    // resolve(1);   // pending => resolved, fulfilled
-    reject(new Error('message')); // pending => rejected
-  }, 2000);
+console.log('Before');
+getUser(1, user => {
+  getRepositories(user.gitHubUsername, repos => {
+    getCommits(repos[0], commits => {
+      console.log(commits);
+    });
+  });
 });
+console.log('After');
 
-p
-  .then(result => console.log('Result:', result))
-  .catch(err => console.log('Error:', err.message));
+function getUser(id) {
+  return new Promise((resolve, reject) => {
+    // kick off some async work
+    setTimeout(() => {
+      console.log('Reading a user from a database...');
+      resolve({ id: id, gitHubUsername: 'mosh' });
+    }, 2000);
+  });
+}
+
+function getRepositories(username) {
+  // kick off some async work
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Calling GitHub API...');
+      resolve(['repo1', 'repo2', 'repo3']);
+    }, 2000);
+  });
+}
+
+function getCommits(repo) {
+  // kick off some async work
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Calling GitHub API...');
+      resolve(['commit']);
+    }, 2000);
+  });
+}
