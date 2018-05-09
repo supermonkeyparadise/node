@@ -1,3 +1,5 @@
+//****************** 同步處理 ********************* */
+
 const p1 = new Promise(resolve => {
   setTimeout(() => {
     console.log('Async operation 1...');
@@ -14,7 +16,7 @@ const p2 = new Promise(resolve => {
 
 Promise.all([p1, p2]).then(result => console.log(result));
 
-//*************************************** */
+//****************** 錯誤處理 ********************* */
 
 const p3 = new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -33,7 +35,8 @@ const p4 = new Promise((resolve, reject) => {
 Promise.all([p3, p4])
   .then(result => console.log(result))
   .catch(err => console.log('Error:', err.message));
-//*************************************** */
+
+//****************** 優先處理 ********************* */
 
 const p5 = new Promise((resolve) => {
     setTimeout(() => {
