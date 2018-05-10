@@ -22,12 +22,19 @@ const courseSchema = new mongoose.Schema({
 // Classes, objects
 // Course,   nodeCourse
 
-// 利用 schema 得到 class *** class 第一個字大寫 ***
+// 1. 利用 schema 得到 class *** class 第一個字大寫 ***
 const Course = mongoose.model('Course', courseSchema);
-// 利用 class new 一個 object
-const course = Course({
-  name: 'Node.js Course',
-  author: 'Mosh',
-  tag: ['node', 'backend'],
-  isPublished: false
-});
+async function createCourse() {
+  // 2. 利用 class new 一個 object
+  const course = Course({
+    name: 'React Course',
+    author: 'Mosh',
+    tags: ['react', 'frontend'],
+    isPublished: false
+  });
+
+  const result = await course.save();
+  console.log(result);
+}
+
+createCourse();
