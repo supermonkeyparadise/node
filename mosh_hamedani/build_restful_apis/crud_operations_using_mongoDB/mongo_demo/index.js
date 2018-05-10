@@ -18,3 +18,16 @@ const courseSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   isPublished: Boolean
 });
+
+// Classes, objects
+// Course,   nodeCourse
+
+// 利用 schema 得到 class *** class 第一個字大寫 ***
+const Course = mongoose.model('Course', courseSchema);
+// 利用 class new 一個 object
+const course = Course({
+  name: 'Node.js Course',
+  author: 'Mosh',
+  tag: ['node', 'backend'],
+  isPublished: false
+});
