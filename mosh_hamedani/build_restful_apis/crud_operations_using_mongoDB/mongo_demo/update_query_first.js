@@ -51,7 +51,7 @@ async function getCourse() {
 }
 
 /**
- * [Query First]
+ * [Query First]  時機： 根據查詢條件，判斷要不要更新資料
  * 1. findById()
  * 2. Modify its properties
  * 3. save()
@@ -61,6 +61,9 @@ async function getCourse() {
 async function updateCourse(id) {
   const course = await Course.findById(id);
   if (!course) return;
+
+  // 某種商業邏輯
+  if (course.isPublished) return;
 
   course.isPublished = true;
   course.author = 'Another Author';

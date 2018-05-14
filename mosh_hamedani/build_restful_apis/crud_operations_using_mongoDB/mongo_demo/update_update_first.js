@@ -57,7 +57,32 @@ async function getCourse() {
  *
  * @param {*} id
  */
-async function updateCourse(id) {}
+async function updateCourse(id) {
+  //   const result = await Course.update(
+  //     { _id: id },
+  //     {
+  //       $set: {
+  //         author: 'Steven',
+  //         isPublished: false
+  //       }
+  //     }
+  //   );
+
+  // new property: 回傳修改過的 course
+  const course = await Course.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        author: 'Allen',
+        isPublished: true
+      }
+    },
+    { new: true }
+  );
+
+  console.log(course);
+}
 
 // createCourse();
-getCourse();
+// getCourse();
+updateCourse('5af415625ea0b216f650307b');
