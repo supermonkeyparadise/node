@@ -58,6 +58,7 @@ async function getCourse() {
  * @param {*} id
  */
 async function updateCourse(id) {
+  // 回傳 結果物件，而不是修改過的物件
   //   const result = await Course.update(
   //     { _id: id },
   //     {
