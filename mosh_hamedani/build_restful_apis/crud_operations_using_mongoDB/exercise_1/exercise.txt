@@ -1,0 +1,2 @@
+// 將 陣列型態的 json 資料塞進 mongodb 的指令
+mongoimport --db mongo-exercises --collection courses --drop --file exercise-data.json --jsonArray
