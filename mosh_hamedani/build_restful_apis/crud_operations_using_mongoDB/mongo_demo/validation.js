@@ -12,11 +12,30 @@ mongoose
 //     documents ===> row(關聯式)
 //         schema ===> 規定 key value 的樣式
 const courseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 255
+    // match: /pattern/
+  },
+  category: {
+    type: String,
+    enum: ['web', 'mobile', 'network'], // 預設允許得值
+    required: true
+  },
   author: String,
   tags: [String],
   date: { type: Date, default: Date.now },
-  isPublished: Boolean
+  isPublished: Boolean,
+  price: {
+    type: Number,
+    required: function() {
+      return this.isPublished;
+    },
+    min: 10,
+    max: 200
+  }
 });
 
 // Classes, objects
@@ -28,13 +47,15 @@ async function createCourse() {
   // 2. 利用 class 得到 一個 object
   const course = Course({
     name: 'React Course',
+    category: '_',
     author: 'Mosh',
     tags: ['react', 'frontend'],
-    isPublished: false
+    isPublished: true,
+    price: 15
   });
 
   try {
-    // 另解  
+    // 另解
     // const isValid = await course.validate();
     // if(!isValid) {}
 
