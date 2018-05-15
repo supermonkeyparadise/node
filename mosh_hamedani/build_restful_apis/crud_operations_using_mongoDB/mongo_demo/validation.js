@@ -22,7 +22,10 @@ const courseSchema = new mongoose.Schema({
   category: {
     type: String,
     enum: ['web', 'mobile', 'network'], // 預設允許得值
-    required: true
+    required: true,
+    lowercase: true,
+    // uppercase: true,
+    trim: true
   },
   author: String,
   tags: {
@@ -42,7 +45,9 @@ const courseSchema = new mongoose.Schema({
       return this.isPublished;
     },
     min: 10,
-    max: 200
+    max: 200,
+    get: v => Math.round(v), // 讀取資料時，呼叫
+    set: v => Math.round(v) // 寫入資料時，呼叫
   }
 });
 
@@ -55,11 +60,11 @@ async function createCourse() {
   // 2. 利用 class 得到 一個 object
   const course = Course({
     name: 'React Course',
-    category: 'web',
+    category: 'WEB',
     author: 'Mosh',
-    tags: [],
+    tags: ['backend'],
     isPublished: true,
-    price: 15
+    price: 15.8
   });
 
   try {
