@@ -25,7 +25,15 @@ const courseSchema = new mongoose.Schema({
     required: true
   },
   author: String,
-  tags: [String],
+  tags: {
+    type: Array,
+    validate: {
+      validator: function(v) {
+        return v && v.length > 0;
+      },
+      message: 'A course should have at least one tag.'
+    }
+  },
   date: { type: Date, default: Date.now },
   isPublished: Boolean,
   price: {
@@ -47,9 +55,9 @@ async function createCourse() {
   // 2. 利用 class 得到 一個 object
   const course = Course({
     name: 'React Course',
-    category: '_',
+    category: 'web',
     author: 'Mosh',
-    tags: ['react', 'frontend'],
+    tags: [],
     isPublished: true,
     price: 15
   });
