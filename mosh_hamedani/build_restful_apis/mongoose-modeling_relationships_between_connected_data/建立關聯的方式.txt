@@ -1,0 +1,30 @@
+ ** Trade off between query performance vs consistency **
+
+[1] Using References (Normalization) -> CONSISTENCY
+    let author ={
+        name: 'Mosh'
+    }
+
+    let course = {
+        author: 'id'
+    }
+
+[2] Using Embedded Document(Denormalization) -> PERFORMANCE
+    let course = {
+        author: {
+            name: 'Mosh'
+        }
+    }
+
+[3] Hybrid
+    let author = {
+        name: 'Mosh',
+        // 50 other properties
+    }
+
+    let course = {
+        author: {
+            id: 'ref',
+            name: 'Mosh'
+        }
+    }
