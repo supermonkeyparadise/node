@@ -12,7 +12,7 @@ const Movie = mongoose.model(
       minlength: 5,
       maxlength: 255
     },
-    genre: {
+    genre: { // 要求為 genre obj
       type: genreSchema,
       required: true
     },

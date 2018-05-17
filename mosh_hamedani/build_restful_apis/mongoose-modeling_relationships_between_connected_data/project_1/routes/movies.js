@@ -18,9 +18,10 @@ router.post('/', async (req, res) => {
 
   let movie = new Movie({
     title: req.body.title,
-    genre: {
+    genre: { // 不要直接存整個 genre，因為有 __v property，
+      // Hybrid
       _id: genre._id,
-      name: genre.name
+      name: genre.name   // 只存必要的資訊
     },
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate
