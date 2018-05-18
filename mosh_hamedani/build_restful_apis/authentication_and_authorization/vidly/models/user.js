@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+// 驗證資料第二關
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -36,6 +37,7 @@ userSchema.methods.generateAuthToken = function() {
 
 const User = mongoose.model('User', userSchema);
 
+// 驗證資料第一關
 function validateUser(user) {
   const schema = {
     name: Joi.string()
@@ -46,7 +48,7 @@ function validateUser(user) {
       .min(5)
       .max(255)
       .required()
-      .email(),
+      .email(), // 這個檢核太酷了！！
     password: Joi.string()
       .min(5)
       .max(255)
