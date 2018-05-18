@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate
   });
+  // movie 的 id 已經由 mongoose 產生了
   await movie.save();
 
   res.send(movie);
