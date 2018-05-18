@@ -1,0 +1,20 @@
+Project 使用 yarn 安裝相關套件
+
+
+[ API Endpoint ]
+    /api/genres
+    /api/movies
+    /api/customers
+    /api/rentals
+
+[ Authentication ]
+    功能：身份確認 ===> login
+
+    API Endpoint
+        Register: POST /api/users 
+            {name ,email, password}
+
+        Login: POST /api/logins
+
+[ Authorization ]
+    功能：授權

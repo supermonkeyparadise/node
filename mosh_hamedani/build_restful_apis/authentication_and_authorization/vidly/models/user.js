@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255,
-    unique: true
+    unique: true  // 唯一值(不可重複)
   },
   password: {
     type: String,
