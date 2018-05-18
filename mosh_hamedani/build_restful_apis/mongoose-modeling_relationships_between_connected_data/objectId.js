@@ -13,5 +13,6 @@ const id = new mongoose.Types.ObjectId();
 console.log('## id:', id);
 console.log('## tiemstamp:', id.getTimestamp());
 
-const isValid = mongoose.Types.ObjectId.isValid('1224');
+// 判斷 objectId 的合法性
+const isValid = mongoose.Types.ObjectId.isValid('5afbec73d585c621cc153f36');
 console.log('## isValid:', isValid);
