@@ -1,5 +1,11 @@
 Project 使用 yarn 安裝相關套件
 
+[ 設定環境變數 ]
+    順位1 custom-environment-variables.json
+        export vidly_jwtPrivateKey=mySecureKey
+
+    順位2 default.json
+
 
 [ API Endpoint ]
     /api/genres
