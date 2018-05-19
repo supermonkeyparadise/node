@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   await user.save();
 
   const token = user.generateAuthToken();
-  // lodash 無敵好用
+  // 客製化 header 都應該加 x-
   res
     .header('x-auth-token', token)
     .send(_.pick(user, ['_id', 'name', 'email']));
