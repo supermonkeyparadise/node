@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
   isAdmin: Boolean
 });
 
+/**
+ * 第一個參數：payload
+ * 第二個參數：private key
+ */
 userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
     { _id: this._id, isAdmin: this.isAdmin },
