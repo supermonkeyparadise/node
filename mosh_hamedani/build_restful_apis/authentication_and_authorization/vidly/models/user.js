@@ -30,6 +30,8 @@ const userSchema = new mongoose.Schema({
 /**
  * 第一個參數：payload
  * 第二個參數：private key
+ * 
+ * [ USE https 確保 token 的安全性 ]
  */
 userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
