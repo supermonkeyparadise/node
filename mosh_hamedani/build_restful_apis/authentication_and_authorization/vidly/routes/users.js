@@ -1,8 +1,8 @@
 const auth = require('../middleware/auth');
 const mongoose = require('mongoose');
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+// const jwt = require('jsonwebtoken');
+// const config = require('config');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 
