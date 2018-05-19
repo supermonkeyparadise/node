@@ -38,6 +38,7 @@ router.put('/:id', async (req, res) => {
   res.send(genre);
 });
 
+// middleware 的順序： auth -> admin
 router.delete('/:id', [auth, admin], async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
 
