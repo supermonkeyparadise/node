@@ -13,6 +13,8 @@ router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send('Invalid email or password.');
 
+  // 驗證密碼機制 user.password include salt
+  // 將傳送過來的密碼加密後，與 DB 內的比較
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send('Invalid email or password.');
 
