@@ -9,6 +9,8 @@ const _ = require('lodash');
 const { User, validate } = require('../models/user');
 const router = express.Router();
 
+// 取得現在的 user
+// req.user._id 由 middleware 提供
 router.get('/me', auth, async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
   res.send(user);
