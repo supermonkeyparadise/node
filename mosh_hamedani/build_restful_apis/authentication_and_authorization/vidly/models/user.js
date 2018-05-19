@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255,
-    unique: true  // 唯一值(不可重複)
+    unique: true // 唯一值(不可重複)
   },
   password: {
     type: String,
@@ -24,13 +24,15 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin: Boolean
+  isAdmin: Boolean,
+  roles: [],
+  operations: []
 });
 
 /**
  * 第一個參數：payload
  * 第二個參數：private key
- * 
+ *
  * [ USE https 確保 token 的安全性 ]
  */
 userSchema.methods.generateAuthToken = function() {
