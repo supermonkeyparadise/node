@@ -6,13 +6,13 @@ const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const { Genre, validate } = require('../models/genre');
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const genres = await Genre.find().sort('name');
     res.send(genres);
   } catch (ex) {
-    // Log the exception
-    res.status(500).send('Something failed.');
+    // 傳給 Error Middleware，因為在 index.js 是最後一個 middleware
+    next(ex);
   }
 });
 
