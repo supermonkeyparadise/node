@@ -1,30 +1,34 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const router = express.Router();
 
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const { Genre, validate } = require('../models/genre');
+const asyncMiddleware = require('./../middleware/async');
 
-router.get('/', async (req, res, next) => {
-  try {
+const router = express.Router();
+
+router.get(
+  '/',
+  asyncMiddleware(async (req, res) => {
     const genres = await Genre.find().sort('name');
     res.send(genres);
-  } catch (ex) {
-    // 傳給 Error Middleware，因為在 index.js 是最後一個 middleware
-    next(ex);
-  }
-});
+  })
+);
 
-router.post('/', auth, async (req, res) => {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post(
+  '/',
+  auth,
+  asyncMiddleware(async (req, res) => {
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  let genre = new Genre({ name: req.body.name });
-  genre = await genre.save();
+    let genre = new Genre({ name: req.body.name });
+    genre = await genre.save();
 
-  res.send(genre);
-});
+    res.send(genre);
+  })
+);
 
 router.put('/:id', async (req, res) => {
   const { error } = validate(req.body);
