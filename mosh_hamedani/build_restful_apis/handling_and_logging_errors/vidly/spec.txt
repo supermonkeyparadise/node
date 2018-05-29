@@ -1,3 +1,13 @@
 Project 使用 yarn 安裝相關套件
 
 使用 nodemon 執行，會一直偵測變更 @@
+
+
+重點：
+    1. Use [ express-async-errors ] library handling Rejected Promises
+       exception 會導向 vidly/middleware/error.js 進行處理(error 500)，表示系統運算時，出現錯誤！！
+
+    2. Use [ winston ] library to logging errors ===> 像 log4j
+       write log to file
+
+       logging level: error, warn, info, verbose, debug, silly
