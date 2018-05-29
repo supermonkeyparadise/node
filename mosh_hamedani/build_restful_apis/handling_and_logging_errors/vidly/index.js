@@ -20,13 +20,20 @@ const rentals = require('./routes/rentals');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 
+// 處理非 request process 的 exception
+process.on('uncaughtException', ex => {
+  console.log('WE GOT AN UNCAUGHT EXCEPTION');
+  winston.error(ex.message, ex);
+});
 // Write log to file
 winston.add(winston.transports.File, { filename: 'logfile.log' });
 // Write log to MongoDB
 winston.add(winston.transports.MongoDB, {
   db: 'mongodb://localhost/vidly',
-  level: 'error'
+  level: 'info'
 });
+
+throw new Error('Someting failed during startup');
 
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');

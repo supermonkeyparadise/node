@@ -22,5 +22,16 @@ Project 使用 yarn 安裝相關套件
            如果 level 設定為 info，則 error, warn, info 層級都會被記錄
            如果 level 設定為 error，則只有 error 層級都會被記錄
 
+
     3. Use [ winston-mongodb ] library logging to MongoDB
+
+
+    4. error.js middleware
+       只能處理 request process 流程相關錯誤
+
+       其餘就交給       
+            process.on('uncaughtException', ex => {
+            console.log('WE GOT AN UNCAUGHT EXCEPTION');
+            winston.error(ex.message, ex);
+            });
 
