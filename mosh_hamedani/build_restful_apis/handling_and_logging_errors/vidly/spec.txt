@@ -1,1 +1,3 @@
 Project 使用 yarn 安裝相關套件
+
+使用 nodemon 執行，會一直偵測變更 @@
