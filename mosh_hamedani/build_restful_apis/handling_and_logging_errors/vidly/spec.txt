@@ -13,7 +13,7 @@ Project 使用 yarn 安裝相關套件
        將訊息輸出到檔案：
            winston.add(winston.transports.File, { filename: 'logfile.log' });
 
-       紀錄訊息：  ( logging level: error, warn, info, verbose, debug, silly )
+       紀錄訊息： 
            winston.error(err.message, err);       
 
        紀錄層級：
@@ -27,7 +27,7 @@ Project 使用 yarn 安裝相關套件
 
 
     4. error.js middleware
-       ** 只能處理 request process 流程相關錯誤 **
+       ** 只能處理 RESQUEST PROCESSING PIPELINE 流程相關錯誤 **
 
        其餘就交給       
             process.on('uncaughtException', ex => {
@@ -47,7 +47,7 @@ Project 使用 yarn 安裝相關套件
             });
 
 
-        進階解法：
+        [ 進階解法 ]：
             // FOR SYNC CODE
             process.on('uncaughtException', ex => {
                 // winston.error(ex.message, ex);
