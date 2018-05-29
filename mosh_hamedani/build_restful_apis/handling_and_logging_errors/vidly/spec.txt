@@ -27,11 +27,47 @@ Project 使用 yarn 安裝相關套件
 
 
     4. error.js middleware
-       只能處理 request process 流程相關錯誤
+       ** 只能處理 request process 流程相關錯誤 **
 
        其餘就交給       
             process.on('uncaughtException', ex => {
-            console.log('WE GOT AN UNCAUGHT EXCEPTION');
-            winston.error(ex.message, ex);
+                winston.error(ex.message, ex);
+                // process.exit(1);
             });
+       但這個解法，只能處理同步(sync)的錯誤!!
+            throw new Error('Someting failed during startup');
+
+       無法處理 async 錯誤！！
+            const p2 = Promise.reject(new Error('Something failed miserably!'));
+            p2.then(() => console.log('Done'));
+       非同步(async) 的解法，如下
+            process.on('unhandledRejection', ex => {
+                winston.error(ex.message, ex);
+                // process.exit(1);
+            });
+
+
+        進階解法：
+            // FOR SYNC CODE
+            process.on('uncaughtException', ex => {
+                // winston.error(ex.message, ex);
+                // process.exit(1);
+            });
+
+            // FOR ASYNC CODE
+            process.on('unhandledRejection', ex => {
+                // winston.error(ex.message, ex);
+                // process.exit(1);
+
+                // 將 async exception 轉換為 sync exception
+                throw ex;
+            });
+
+            // 使用另一個 log file 紀錄 uncaughtException，不使用原本的 logfile.log 紀錄
+            winston.handleExceptions(
+                new winston.transports.File({ filename: 'uncaughtException.log' })
+            );
+    
+
+
 

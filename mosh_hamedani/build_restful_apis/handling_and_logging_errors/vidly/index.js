@@ -21,10 +21,22 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 
 // 處理非 request process 的 exception
+// FOR SYNC CODE
 process.on('uncaughtException', ex => {
-  console.log('WE GOT AN UNCAUGHT EXCEPTION');
-  winston.error(ex.message, ex);
+  // winston.error(ex.message, ex);
+  // process.exit(1);
 });
+
+// FOR ASYNC CODE
+process.on('unhandledRejection', ex => {
+  // winston.error(ex.message, ex);
+  // process.exit(1);
+  throw ex;
+});
+
+winston.handleExceptions(
+  new winston.transports.File({ filename: 'uncaughtException.log' })
+);
 // Write log to file
 winston.add(winston.transports.File, { filename: 'logfile.log' });
 // Write log to MongoDB
@@ -33,7 +45,10 @@ winston.add(winston.transports.MongoDB, {
   level: 'info'
 });
 
-throw new Error('Someting failed during startup');
+// FOR TESTING EXCEPTION!!
+// throw new Error('Someting failed during startup');
+const p2 = Promise.reject(new Error('Something failed miserably!'));
+p2.then(() => console.log('Done'));
 
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');
