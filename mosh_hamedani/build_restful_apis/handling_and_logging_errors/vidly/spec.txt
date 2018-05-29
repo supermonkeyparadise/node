@@ -7,7 +7,20 @@ Project 使用 yarn 安裝相關套件
     1. Use [ express-async-errors ] library handling Rejected Promises
        exception 會導向 vidly/middleware/error.js 進行處理(error 500)，表示系統運算時，出現錯誤！！
 
-    2. Use [ winston ] library to logging errors ===> 像 log4j
-       write log to file
 
-       logging level: error, warn, info, verbose, debug, silly
+    2. Use [ winston ] library to logging errors ===> 像 log4j
+       
+       將訊息輸出到檔案：
+           winston.add(winston.transports.File, { filename: 'logfile.log' });
+
+       紀錄訊息：  ( logging level: error, warn, info, verbose, debug, silly )
+           winston.error(err.message, err);       
+
+       紀錄層級：
+           logging level: error, warn, info, verbose, debug, silly
+
+           如果 level 設定為 info，則 error, warn, info 層級都會被記錄
+           如果 level 設定為 error，則只有 error 層級都會被記錄
+
+    3. Use [ winston-mongodb ] library logging to MongoDB
+
